@@ -1,0 +1,52 @@
+.user-name{
+  color: white !important;
+}
+
+.new-message{
+  border-top: 2px solid skyblue;
+  bottom: 0px;
+  width: calc(100% - 1px);
+}
+
+.message-content{
+  overflow: scroll;
+  height: calc(100% - 343px);
+}
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.btn-upload {
+  border: 2px solid gray;
+  color: gray;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.upload-btn-wrapper input[type=file] {
+  
+  font-size: 20px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.card-body{
+  padding-bottom: 0px !important;
+}
+
+.message{
+  padding: 10px;
+}
+
+.message-card{
+  margin-bottom: 5px;
+  width: 70%;
+}

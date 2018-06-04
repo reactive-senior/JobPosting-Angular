@@ -1,0 +1,111 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
+  <div class="container">
+    <a routerLink="" class="navbar-brand">Customer landing page</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarMain">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a routerLink='/chat' class="btn btn-primary">Chat Platform</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a routerLink='../customer-profile' class="btn btn-primary">Update Profile Settings</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="btn btn-primary" (click)="doLogOut()">Log out</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div *ngIf="isLoading" class="full-screen">
+  <div class="text-center">
+    <img src="../../assets/spinner.gif" alt="Spinner" style="margin-top: 15%;"/>
+  </div>
+</div>
+
+
+<div *ngIf="!isLoading">
+  <div class="row m-4">
+    <div class="col-lg-4 border-right">
+      <div class="mr-4">
+
+        <div class="mb-2"><h4>Service Request Info</h4></div>
+        <div class="m-portlet m-portlet--tabs p-4">
+          <div class="mb-3">Customer Name: {{username}}</div>
+          <div class="mb-3">Service Request ID: {{servicerequestkey}}</div>
+          <div class="mb-3">Title: {{service_info.servicetitle}}</div>
+          <div class="mb-3">
+            <div class="mb-2">Categories:</div>
+            <div *ngIf="categories.length > 0">
+              <button *ngFor="let category of categories" type="button" class="mb-3 mr-3 btn m-btn--pill m-btn--air m-btn m-btn--gradient-from-primary m-btn--gradient-to-info">
+                  {{category}}
+              </button>
+            </div>
+          </div>
+          <div class="mb-3">Start Date: {{service_info.startdate}}</div>
+          <div class="mb-3">Zip Code: {{service_info.zipcode}}</div>
+        </div>
+
+        <div class="mb-2"><h4>Address Info</h4><span *ngIf="selectedAddress == 0" class="text-warning" style="font-size: 15px;">Please select your address</span></div>
+        <div class="m-portlet m-portlet--tabs p-4">
+          <div class="mb-3">Address Line 1: {{selectedAddressInfo.Address1}} </div>
+          <div class="mb-3">Address Line 2: {{selectedAddressInfo.Address2}}</div>
+          <div class="mb-3">City: {{selectedAddressInfo.city}}</div>
+          <div class="mb-3">State: {{selectedAddressInfo.state}}</div>
+          <div class="mb-3">Country: {{selectedAddressInfo.country}}</div>
+          <div class="mb-3">Postal Code: {{selectedAddressInfo.postalCode}}</div>
+          <div class="mb-3">Type: {{selectedAddressInfo.type}}</div>
+        </div>
+        
+      </div>
+    </div>
+
+    <div class="col-lg-8">
+      <div class="ml-4">
+          <div class="mb-2"><h4>Some additional Info</h4></div>
+          <div class="m-portlet m-portlet--tabs p-4">
+              <div class="mb-3 row">
+                <div class="mb-2 mr-2">Description:</div>
+                <textarea name="description" cols="100" rows="5" [(ngModel)]="description" style="font-size: 20px;"></textarea>
+              </div>
+              <div class="mb-3">Your address:
+                <select class="form-control m-input--fixed mr-3" id="m_notify_placement_from" [(ngModel)]="selectedAddress" (change)="handleAddressChange($event.target.value)">
+                  <option value="0">
+                    Select your address
+                  </option>
+                  <option *ngFor="let address of addressInfos" [value]="address.addressId">
+                    {{address.type}}
+                  </option>
+                </select>
+                <button type="button" class="btn m-btn--pill m-btn--air btn-primary btn-md" (click)="addAddress()">
+                  Add some addresses
+                </button>
+            </div>
+              <div class="upload-btn-wrapper mb-3">
+                Add some images:
+                  <button class="btn-upload">
+                    <fa name="paperclip"></fa>&nbsp;Attatchment</button>
+                  <input type="file" name="myfile" (change)="handleFileInput($event)" multiple/>
+              </div>
+              
+              <div class="text-right">
+                <button type="button" class="btn m-btn--pill m-btn--air btn-primary btn-lg" (click)="updateServiceInfo()">
+                  Update Service Info
+                </button>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

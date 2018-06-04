@@ -1,0 +1,66 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~open-iconic/font/css/open-iconic-bootstrap.css';
+
+
+body{
+  background-color: rgb(255, 255, 255);
+}
+
+.full{
+  height: 100vh;
+}
+
+.panel{
+  height: 100%;
+  background-color: white;
+}
+
+.user-image{
+  display: inline-block;
+  border-radius: 60px;
+  box-shadow: 0px 0px 2px black;
+  padding: 0.4em 0.6em;
+}
+
+.user-selected{
+  background-color: antiquewhite;
+  border-left: 4px solid red !important;
+}
+
+.list-group-item{
+  cursor: pointer;
+}
+
+.same-height{
+  height: 43px;
+}
+
+.padding-0{
+    padding-right:0;
+    padding-left:0;
+}
+
+.message-panel{
+  border-left: 1px solid gray;
+}
+
+.message-content{
+  height: 70%;
+}
+
+.new-message{
+  height: 30%;
+}
+
+nav{
+  border-bottom: 2px solid skyblue;
+}
+
+.user-list{
+  overflow: scroll;
+  height: calc(100% - 61px);
+}
+
+.inline-flashmessage{
+  display: inline;
+}

@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
+  <div class="container">
+    <a routerLink="" class="navbar-brand">Customer landing page</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarMain">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a routerLink='/chat' class="btn btn-primary">Chat Platform</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a routerLink='../customer-profile' class="btn btn-primary">Update Profile Settings</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="btn btn-primary" (click)="doLogOut()">Log out</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div *ngIf="isLoading" class="full-screen">
+  <div class="text-center">
+    <img src="../../assets/spinner.gif" alt="Spinner" style="margin-top: 15%;"/>
+  </div>
+</div>
+
+
+<div *ngIf="!isLoading">
+  <h2 class="ml-3 mb-3">Service Info</h2>
+  <div *ngFor="let service of serviceRequests" class="row">
+    <div class="col-11 ml-3">
+      <div class="m-portlet m-portlet--tabs p-4">
+        <div>Service Request Key: {{service.servicerequestkey}}</div>
+        <div>Start Date: {{service.startdate}}</div>
+        <div>Address Id: {{service.addressId}}</div>
+        <div>Vendor: Vendor Name</div>
+      </div>
+    </div>
+  </div>
+</div>

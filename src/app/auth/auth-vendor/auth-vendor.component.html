@@ -1,0 +1,55 @@
+<div class="mb-5"></div>
+
+<div class="row">
+  <div class="col-md-6 mx-auto">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="text-center pb-4 pt-3">
+          <span class="text-primary">
+            <i class="fa fa-lock"></i> Vendor </span> Login
+        </h1>
+        <form #vendorLogin="ngForm" (ngSubmit)="onSubmit(vendorLogin)">
+          <div class="form-group">
+            <label for="username">Username *</label>
+            <input 
+              #vendorName="ngModel"
+              [ngClass]="{'is-invalid':vendorName.errors && vendorName.touched}"
+              type="text" 
+              name="username" 
+              [(ngModel)]="username" 
+              class="form-control" 
+              required
+            >
+            <div [hidden]="!vendorName.errors?.required" class="invalid-feedback">
+              User name required
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password">Password *</label>
+            <input
+              #vendorPassword="ngModel"
+              [ngClass]="{'is-invalid':vendorPassword.errors && vendorPassword.touched}"
+              type="password" 
+              name="password" 
+              [(ngModel)]="password" 
+              class="form-control" 
+              required
+            >
+            <div [hidden]="!vendorPassword.errors?.required" class="invalid-feedback">
+              Password required
+            </div>
+          </div>
+          <div class="text-center">
+            <input 
+              type="submit" 
+              value="Sign In" 
+              class="btn btn-primary btn-block mb-2"
+              [disabled]="!vendorLogin.valid"
+            >
+            Not have an account yet? <a routerLink='signup' class="btn-link">Sign up</a> now.
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="mb-5"></div>
+
+<div class="row">
+  <div class="col-md-6 mx-auto">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="text-center pb-4 pt-3">
+          <span class="text-primary">
+            <i class="fa fa-lock"></i> Vendor </span> Signup
+        </h1>
+        <form #vendorForm="ngForm" (ngSubmit)="onSubmit(vendorForm)">
+          <div class="form-group">
+            <label for="username">Username *</label>
+            <input #vendorName="ngModel" [ngClass]="{'is-invalid':vendorName.errors && vendorName.touched}" type="text" name="username"
+              [(ngModel)]="user_name" class="form-control" required>
+            <div [hidden]="!vendorName.errors?.required" class="invalid-feedback">
+              User name required
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password *</label>
+            <input #vendorPassword="ngModel" [ngClass]="{'is-invalid':vendorPassword.errors && vendorPassword.touched}" type="password"
+              name="password" [(ngModel)]="vendor_password" class="form-control" required>
+            <div [hidden]="!vendorPassword.errors?.required" class="invalid-feedback">
+              Password required
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="confirm_password">Confirm Password *</label>
+            <input #vendorPasswordConfirm="ngModel" [ngClass]="{'is-invalid':(vendorPasswordConfirm.errors && vendorPasswordConfirm.touched) || (vendor_password !== confirm_password && vendorPasswordConfirm.touched)}"
+              type="password" name="confirm_password" [(ngModel)]="confirm_password" class="form-control" required>
+            <div [hidden]="!vendorPasswordConfirm.errors?.required" class="invalid-feedback">
+              Confirm password required
+            </div>
+            <div [hidden]="!(vendor_password !== confirm_password)" class="invalid-feedback">
+              Password mismatch
+            </div>
+          </div>
+
+          <input [disabled]="!(vendor_password === confirm_password) || vendorPasswordConfirm.errors || vendorName.errors" type="submit"
+            value="Sign up" class="btn btn-primary btn-block">
+          <div class="text-center mt-3">Already have an account? <a routerLink='../' class="btn-link"> Log In</a></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

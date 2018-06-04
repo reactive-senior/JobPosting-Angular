@@ -1,0 +1,73 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
+  <div class="container">
+    <a class="navbar-brand">Tell us a bit about your job.</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarMain">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link">Category</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">Date</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">Zipcode</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div *ngIf="isLoading" class="full-screen">
+  <div class="text-center">
+    <img src="../../assets/spinner.gif" alt="Spinner" style="margin-top: 15%;"/>
+  </div>
+</div>
+
+<div *ngIf="!isLoading">
+  <div class="row m-4">
+    <div class="col-lg-4 border-right">
+      <div class="mr-4">
+
+        <div class="mb-2"><h4>Categories</h4></div>
+        <div class="m-portlet m-portlet--tabs p-4">
+          <form (ngSubmit)="onAddCategory()">
+            <label class="mr-1">Input Categories</label><span class="ml-2" style="font-size: 10px; color: gray;">Note: If the category is incorrect, please write categories here.</span>
+            <input [(ngModel)]="category" name="category" type="text" class="mb-4 form-control m-input m-input--square" placeholder="">
+          </form>
+          <button *ngFor="let category of categories; let i = index;" type="button" class="mb-3 mr-3 btn m-btn--pill m-btn--air m-btn m-btn--gradient-from-primary m-btn--gradient-to-info" (click)="removeCategory(i)">
+              {{category}}
+          </button>
+          <div *ngIf="categories.length == 0" class="ml-2 text-warning">
+            <span class="mr-2">
+              <fa name="warning"></fa>
+            </span>
+            Please select Categories
+          </div>
+        </div>
+
+        <div class="mb-2"><h4>Your start date</h4></div>
+        <div class="m-portlet m-portlet--tabs p-4">
+            <my-date-picker name="mydate" [options]="myDatePickerOptions" [(ngModel)]="dateModel" required></my-date-picker>
+        </div>
+
+        <div class="mb-2"><h4>Zip Code</h4></div>
+        <div class="m-portlet m-portlet--tabs p-4">
+          <label class="mr-1">Zipcode</label>
+          <input [(ngModel)]="zipcode" name="zipcode" type="text" class="mb-4 form-control m-input m-input--square" placeholder="">
+        </div>
+        
+      </div>
+    </div>
+    <div>
+      <div class="ml-4">
+        <button type="button" class="btn m-btn--pill m-btn--air btn-primary btn-lg" (click)="bookService()">
+          Book The Service
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

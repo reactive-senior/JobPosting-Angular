@@ -1,0 +1,66 @@
+<div class="panel message-panel">
+  <nav class="navbar navbar-dark bg-danger sticky-top">
+    <div class="row same-height">
+      <div class="col-md-3">
+        <a class="navbar-brand user-name" *ngIf="user">
+          {{user.username}}
+        </a>
+      </div>
+    </div>
+  </nav>
+  <div class="message-content">
+    <div *ngIf="messagesToShow.length != 0" class="message">
+      <div *ngFor="let single of messagesToShow"  [ngClass]="single.sender_id==me.partyId ? styleSent : styleReceived">
+        <div>
+          <div *ngIf="single.sender_id==me.partyId" class="card-header">
+            <fa name="user"></fa>&nbsp;{{single.subject}}
+          </div>
+          <div *ngIf="single.sender_id!=me.partyId" class="card-header">
+            <fa name="user-secret"></fa>&nbsp;{{single.subject}}
+          </div>
+          <div class="message">
+            {{single.body}}<br><br>
+            <div *ngIf="single.attatchments.length != 0">
+              <fa name="paperclip"></fa>Attatchment: 
+              <div *ngFor="let attatch of single.attatchments">
+                <a [href]="attatch.linkName" download target="_blank" attributes="#">{{attatch.orgName}}</a>
+                <div class="popup" attributes="#"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            {{single.sent_time}}
+            <div class="float-right" *ngIf="single.sender_id==me.partyId">
+              <fa name="trash" size="1x" (click)="deleteMessage(single.messageId)"></fa>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="messagesToShow.length == 0" class="message">
+      <div *ngIf="user && loadingState" class="text-danger text-center"><img src="../../assets/spinner.gif" alt="Spinner"></div>
+      <div *ngIf="user && !loadingState" class="text-danger">No message with this {{user.type == '001' ? "vendor" : "buyer"}}.</div>
+    </div>
+  </div>
+  <div class="new-message">
+    <div class="card">
+      <div class="card-body">
+        <div class="form-group">
+          <form action="">
+            <label for="subject">Subject</label>
+            <input type="text" class="form-control" id="subject" placeholder="Subject" [(ngModel)]="message_subject" name="message_subject">
+            <label for="subject">Message</label>
+            <textarea class="form-control" id="content" rows="3" placeholder="Content" [(ngModel)]="message_content" name="message_content"></textarea>
+            <div class="upload-btn-wrapper">
+              <button class="btn-upload"><fa name="paperclip"></fa>&nbsp;Attatchment</button>
+              <input type="file" name="myfile" (change)="handleFileInput($event)" multiple/>
+            </div>
+            <div class="upload-btn-wrapper float-right">
+             <button type="submit" class="btn-upload" (click)="submitForm()">Send</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

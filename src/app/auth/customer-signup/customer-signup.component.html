@@ -1,0 +1,57 @@
+<div class="mb-5"></div>
+
+<div class="row">
+  <div class="col-md-6 mx-auto">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="text-center pb-4 pt-3">
+          <span class="text-primary">
+            <i class="fa fa-lock"></i> Customer </span> Signup
+        </h1>
+
+        <div class="form-group text-center mb-4">
+          <button class="loginBtn loginBtn--facebook rounded-0" (click)="socialSignIn('facebook')">
+            Signup with Facebook
+          </button>
+          <button class="loginBtn loginBtn--google rounded-0" (click)="socialSignIn('google')">
+            Signup with Google
+          </button>
+        </div>
+        
+        <form #customerForm="ngForm" (ngSubmit)="onSubmit(customerForm)">
+          <div class="form-group">
+            <label for="username">Username *</label>
+            <input #customerName="ngModel" [ngClass]="{'is-invalid':customerName.errors && customerName.touched}" type="text" name="username"
+              [(ngModel)]="user_name" class="form-control" required>
+            <div [hidden]="!customerName.errors?.required" class="invalid-feedback">
+              User name required
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password *</label>
+            <input #customerPassword="ngModel" [ngClass]="{'is-invalid':customerPassword.errors && customerPassword.touched}" type="password"
+              name="password" [(ngModel)]="customer_password" class="form-control" required>
+            <div [hidden]="!customerPassword.errors?.required" class="invalid-feedback">
+              Password required
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="confirm_password">Confirm Password *</label>
+            <input #customerPasswordConfirm="ngModel" [ngClass]="{'is-invalid':(customerPasswordConfirm.errors && customerPasswordConfirm.touched) || (customer_password !== confirm_password && customerPasswordConfirm.touched)}"
+              type="password" name="confirm_password" [(ngModel)]="confirm_password" class="form-control" required>
+            <div [hidden]="!customerPasswordConfirm.errors?.required" class="invalid-feedback">
+              Confirm password required
+            </div>
+            <div [hidden]="!(customer_password !== confirm_password)" class="invalid-feedback">
+              Password mismatch
+            </div>
+          </div>
+
+          <input [disabled]="!(customer_password === confirm_password) || customerPasswordConfirm.errors || customerName.errors" type="submit"
+            value="Sign up" class="btn btn-primary btn-block">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

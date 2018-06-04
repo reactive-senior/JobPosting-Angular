@@ -1,0 +1,10 @@
+<div class="container-fluid">
+  <div class="row full">
+    <div class="col-md-3 padding-0">
+      <app-userslist [userType] = "'vendors'" (userChange) = "handleUserChange($event)"></app-userslist>
+    </div>
+    <div class="col-md-9 padding-0">
+      <app-messages [user] = "user"></app-messages>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<div *ngIf="isLoading" class="full-screen">
+  <div class="text-center">
+    <img src="../../assets/spinner.gif" alt="Spinner" style="margin-top: 15%;"/>
+  </div>
+</div>
+
+<div *ngIf="!isLoading">
+  <div class="mb-5"></div>
+
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="text-center pb-4 pt-3">
+            <span class="text-primary">
+              <i class="fa fa-lock"></i> Customer </span> Login
+          </h1>
+
+          <div class="form-group text-center mb-4">
+            <button class="loginBtn loginBtn--facebook rounded-0" (click)="socialSignIn('facebook')">
+              Login with Facebook
+            </button>
+            <button class="loginBtn loginBtn--google rounded-0" (click)="socialSignIn('google')">
+              Login with Google
+            </button>
+          </div>
+          
+          <form #customerLogin="ngForm" (ngSubmit)="onSubmit(customerLogin)">
+            <div class="form-group">
+              <label for="username">Username *</label>
+              <input #customerName="ngModel" [ngClass]="{'is-invalid':customerName.errors && customerName.touched}" type="text" name="username"
+                [(ngModel)]="username" class="form-control" required>
+              <div [hidden]="!customerName.errors?.required" class="invalid-feedback">
+                User name required
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password">Password *</label>
+              <input #customerPassword="ngModel" [ngClass]="{'is-invalid':customerPassword.errors && customerPassword.touched}" type="password"
+                name="password" [(ngModel)]="password" class="form-control" required>
+              <div [hidden]="!customerPassword.errors?.required" class="invalid-feedback">
+                Password required
+              </div>
+            </div>
+            <div class="text-center">
+              <input type="submit" value="Sign In" class="btn btn-primary btn-block mb-2" [disabled]="!customerLogin.valid"> Not have an account yet?
+              <a routerLink='signup' class="btn-link">Sign up</a> now.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
